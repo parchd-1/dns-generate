@@ -1,0 +1,8 @@
+.mydomain.com::a.my-ns.url
+.mydomain.com::b.my-ns.url
+.mydomain.com::c.my-ns.url
+=mydomain.com:123.245.32.12:300
++www.mydomain.com:123.245.32.12:300
++ftp.mydomain.com:123.245.32.12:300
+@mydomain.com:123.245.32.12:10:300
+'mydomain.com:v=spf1 a ~all:300

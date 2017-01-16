@@ -1,0 +1,21 @@
+{"mydomain.com":
+        {
+                "nameservers":[
+                        "a.my-ns.url",
+                        "b.my-ns.url",
+                        "c.my-ns.url"
+                ],
+
+                "ip4":"123.245.32.12",
+                "ip6":"fe80::215:afff:fe44:3a26",
+                "aliases":[
+                        "www.mydomain.com",
+                        "ftp.mydomain.com"
+                ],
+
+                "DKIM":[
+                        "/var/dkim/current",
+                        "/var/dkim/next"
+                ]
+        }
+}
