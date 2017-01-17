@@ -34,8 +34,7 @@ def main():
         dconf = config[domain]
         output = []
         
-        if "ttl" in dconf:
-            ttl = dconf.get("ttl", ttl)
+        ttl = dconf.get("ttl", ttl)
 
         # nameservers
         for ns in dconf['nameservers']:
