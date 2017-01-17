@@ -52,7 +52,7 @@ def main():
         prio = 0
         
         for ip in dconf.get('mx', [dconf['ip4']]):
-            output.append(mx.format(domain=domain, ip=ip, name="mx"+prio, distance=prio, ttl=ttl))
+            output.append(mx.format(domain=domain, ip=ip, name=f"mx{prio}", distance=prio, ttl=ttl))
             prio += 1
 
         output.append(spf.format(domain=domain, ttl=ttl))
