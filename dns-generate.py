@@ -13,8 +13,10 @@ ttl = 300
 # Templates
 nameserver = ".{domain}::{ns}"
 arecord = "={domain}:{ip4}:{ttl}"
-mx = "@{domain}:{ip4}:{distance}:{ttl}"
+aaaarecord = "6{domain}:{ip6}:{ttl}"
+mx = "@{domain}:{ip4}:{name}:{distance}:{ttl}"
 alias = "+{alias}:{ip4}:{ttl}"
+alias6 = "3{alias}:{ip6}:{ttl}"
 spf = "'{domain}:v=spf1 a ~all:{ttl}"
 dkim = "'{selector}._domainkey.{domain}:v=DKIM1; k=rsa; p={key}:{ttl}"
 
@@ -31,6 +33,9 @@ def main():
     for domain in config:
         dconf = config[domain]
         output = []
+        
+        if "ttl" in dconf:
+            ttl = dconf["ttl"]
 
         # nameservers
         for ns in dconf['nameservers']:
@@ -44,8 +49,11 @@ def main():
             output.append(alias.format(alias=subd, ip4=dconf['ip4'], ttl=ttl))
 
         # Mail
-        prio = 10
-        output.append(mx.format(domain=domain, ip4=dconf['ip4'], distance=prio, ttl=ttl))
+        prio = 0
+        for name in dconf['mx']:
+            output.append(mx.format(domain=domain, ip4=dconf['ip4'], name=name, distance=prio, ttl=ttl))
+            prio += 1
+
         output.append(spf.format(domain=domain, ttl=ttl))
         for keyfile in dconf['DKIM']:
             try:
