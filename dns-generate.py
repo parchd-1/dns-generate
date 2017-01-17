@@ -50,7 +50,7 @@ def main():
 
         # Mail
         prio = 0
-        for name in dconf['mx']:
+        for name in dconf.get('mx', []):
             output.append(mx.format(domain=domain, ip4=dconf['ip4'], name=name, distance=prio, ttl=ttl))
             prio += 1
 
