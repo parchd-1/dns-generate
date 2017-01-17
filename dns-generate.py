@@ -7,8 +7,9 @@ from os.path import basename, realpath, join
 
 conf_file = "/etc/dns-generate/domains.json"
 
-# defaults
-ttl = 300
+defaults = {
+    "ttl": 300
+}
 
 # Templates
 nameserver = ".{domain}::{ns}"
@@ -34,7 +35,7 @@ def main():
         dconf = config[domain]
         output = []
         
-        ttl = dconf.get("ttl", ttl)
+        ttl = dconf.get("ttl", defaults["ttl"])
 
         # nameservers
         for ns in dconf['nameservers']:
