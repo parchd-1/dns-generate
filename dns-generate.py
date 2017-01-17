@@ -15,7 +15,7 @@ defaults = {
 nameserver = ".{domain}::{ns}"
 arecord = "={domain}:{ip4}:{ttl}"
 aaaarecord = "6{domain}:{ip6}:{ttl}"
-mx = "@{domain}:{ip4}:{name}:{distance}:{ttl}"
+mx = "@{domain}:{ip}:{name}:{distance}:{ttl}"
 alias = "+{alias}:{ip4}:{ttl}"
 alias6 = "3{alias}:{ip6}:{ttl}"
 spf = "'{domain}:v=spf1 a ~all:{ttl}"
@@ -50,8 +50,9 @@ def main():
 
         # Mail
         prio = 0
-        for name in dconf.get('mx', []):
-            output.append(mx.format(domain=domain, ip4=dconf['ip4'], name=name, distance=prio, ttl=ttl))
+        
+        for ip in dconf.get('mx', [dconf['ip4']]):
+            output.append(mx.format(domain=domain, ip=ip, name="mx"+prio, distance=prio, ttl=ttl))
             prio += 1
 
         output.append(spf.format(domain=domain, ttl=ttl))
