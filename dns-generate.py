@@ -35,7 +35,7 @@ def main():
         output = []
         
         if "ttl" in dconf:
-            ttl = dconf["ttl"]
+            ttl = dconf.get("ttl", ttl)
 
         # nameservers
         for ns in dconf['nameservers']:
