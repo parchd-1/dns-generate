@@ -64,4 +64,4 @@ if __name__ == "__main__":
     if len(sys.argv) == 2:
         main()
     else:
-        print(f"Usage: {argv[0]} output_dir")
+        print(f"Usage: {sys.argv[0]} output_dir")
